@@ -191,4 +191,16 @@ signed main() {
 //     }
 // }
 
+// Buckets method lower bound:
+// for (int i = 0; i < n; i++) {
+//     auto it = lower_bound(temp.begin(), temp.end(), a[i]);
+//     int idx = it - temp.begin();
+//     if (it == temp.end()) {
+//         temp.push_back(a[i]);
+//     } else {
+//         *it = a[i];
+//     }
+//     LIS[i] = idx + 1;
+// }
+
 
