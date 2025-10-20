@@ -245,7 +245,7 @@ signed main() {
     return 0;
 }
 // JAI SHREE RAM
-
+// For maximum subarray XOR -> we insert prefix XORs into the TRIE, find the maximum pair XOR for the subarray
 
 template <typename T = int> class TrieXOR {
 private:
