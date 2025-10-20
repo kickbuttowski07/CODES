@@ -39,18 +39,14 @@ signed main() {
 // Prims :
 // Dense O(n^ 2)(more no of edges relative to vertices), Sparse(m log n)(small no of edges relative to vertices)
 // Mininum Spanning Trees by kruskal algorithm
-int spanningTree(int V, vector<vector<int>> adj[])
-{
+int spanningTree(int V, vector<vector<int>> adj[]) {
     // code here
     vector<vector<int>> edges;
-    for (int u = 0; u < V; ++u)
-    {
-        for (auto it : adj[u])
-        {
+    for (int u = 0; u < V; ++u) {
+        for (auto it : adj[u]) {
             int v = it[0];
             int weight = it[1];
-            if (u < v)
-            {
+            if (u < v) {
                 edges.push_back({weight, u, v});
             }
         }
@@ -58,40 +54,33 @@ int spanningTree(int V, vector<vector<int>> adj[])
     sort(edges.begin(), edges.end());
     vector<int> parent(V, -1), rank(V, 1);
     // use DSU instead;
-    auto find = [&](int i, auto &&ref) -> int
-    {
-        if (parent[i] == -1)
+    auto find = [&](int i, auto &&ref) -> int {
+        if (parent[i] == -1) {
             return i;
+        }
         return parent[i] = ref(parent[i], ref);
     };
-    auto unite = [&](int x, int y) -> void
-    {
+    auto unite = [&](int x, int y) -> void {
         int s1 = find(x, find);
         int s2 = find(y, find);
 
-        if (s1 != s2)
-        {
-            if (rank[s1] < rank[s2])
-            {
+        if (s1 != s2) {
+            if (rank[s1] < rank[s2]) {
                 parent[s1] = s2;
             }
-            else if (rank[s1] > rank[s2])
-            {
+            else if (rank[s1] > rank[s2]) {
                 parent[s2] = s1;
             }
-            else
-            {
+            else {
                 parent[s2] = s1;
                 rank[s1] += 1;
             }
         }
     };
     int sum = 0;
-    for (auto i : edges)
-    {
+    for (auto i : edges) {
         int x = i[0], y = i[1], z = i[2];
-        if (find(y, find) != find(z, find))
-        {
+        if (find(y, find) != find(z, find)) {
             unite(y, z);
             sum += x;
         }
@@ -99,7 +88,7 @@ int spanningTree(int V, vector<vector<int>> adj[])
     return sum;
 }
 
-// topo_sort
+// TOPO SORT
 // Only exists in DAG 
 // If the nodes of a graph are connected through directed edges and 
 // the graph does not contain a cycle, it is called a directed acyclic graph(DAG). 
