@@ -1,6 +1,6 @@
 // always use the vis vector to check instead of thinking greedy to not waste memory
-// if graph is acyclic then only use par attribute else use bool array onlhy if not it leads to tle
-// *****need to run bfs from all nodes cause the cycle can start from any where it self fr shortest, longest cycle
+// if graph is acyclic then only use par attribute else use bool array only if not it leads to tle
+// *****need to run bfs from all nodes cause the cycle can start from any where it self for shortest, longest cycle
 // Graph example:
 // 6
 // 1 2
@@ -80,28 +80,20 @@ function<void(int)> simple_dfs = [&](int src) -> void
 // Every edge connects vertices in different sets : Every edge in a bipartite graph connects a vertex from one set to a vertex from the other set.
 // No odd - length cycles : A bipartite graph cannot contain any odd - length cycles, as this would require vertices from the same set to be connected by an edge.
 // Maximum degree is bounded by the size of the smaller set : The maximum degree of a vertex in a bipartite graph is equal to the size of the smaller set.
-// Coloring with two colors : A bipartite graph can be colored with two colors, , such that no adjacent vertices have the same color.
+// Coloring with two colors : A bipartite graph can be colored with two colors, such that no adjacent vertices have the same color.
 vector<vector<int>> g;
 vector<int> color;
 vector<bool> vis;
 // vll cnt[2];// check which are the sets
-vector<bool> vis(N);
-function<bool(int, int)> dfs_bipartite = [&](int par, int col) -> bool
-{
-    vis[par] = 1;
+function<bool(int, int)> dfs_bipartite = [&](int par, int col) -> bool {
     color[par] = col;
-
-    for (auto child : g[par])
-    {
-        if (!vis[child])
-        {
-            if (!dfs_bipartite(child, col ^ 1))
-            {
+    for (auto ch : g[par]) {
+        if (color[ch] == -1) {
+            if (!dfs_bipartite(ch, col ^ 1)) {
                 return false;
             }
         }
-        else if (color[par] == color[child])
-        {
+        else if (color[ch] == col) {
             return false;
         }
     }
@@ -174,7 +166,6 @@ function<bool(int)> dfs_cycle = [&](int src) -> bool{
             st = ch, ed = src; // the cycle 
             return true;
         }
-
     }
     col[src] = 2; // when exited colored 2
     return false;

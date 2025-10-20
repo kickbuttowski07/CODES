@@ -1,0 +1,13 @@
+function<void(int, int, int)> dfs2 = [&](int u, int p, int pre) -> void {
+    int sum = (pre + val[u]) % k;
+    cnt += temp[sum];
+    temp[sum]++;
+    for(auto v : g[u]) {
+        if(v != p) {
+            dfs2(v, u, sum);
+        }
+    }
+    temp[sum]--;
+};
+
+// backtracking considering only the path from root to the node

@@ -253,3 +253,6 @@ int main()
 //     return -1;
 // }
 // return cnt;
+
+// Sorting a pair according to the conditions, a[i] < a[j], b[i], b[j] (a, b) are pairs
+// LIS -> sort a ->asc, b-> desc(to avoid conflicts with same a);

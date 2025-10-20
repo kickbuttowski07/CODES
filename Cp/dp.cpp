@@ -203,4 +203,6 @@ signed main() {
 //     LIS[i] = idx + 1;
 // }
 
+// lower bound strictly increasing, upper bound non decreasing.
+
 
