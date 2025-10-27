@@ -84,7 +84,7 @@ int main()
 // Matrix chain multiplication information all
 
 // digit dp sum of all digits of numbers in the range [a, b]
-// in some cases product also consider but can't able to store them so we use unordered_map<string, int>dp
+// in some cases product also consider but can't able to store them so we use unordered_map<string, int> dp
 // https://leetcode.com/problems/numbers-with-repeated-digits/description/
 // https://leetcode.com/problems/count-the-number-of-powerful-integers/description/
 

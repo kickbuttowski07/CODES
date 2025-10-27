@@ -1,69 +1,65 @@
 #include <bits/stdc++.h>
 using namespace std;
+const int N = 2e5 + 1, MOD = (int)(1e9 + 7);
 #define int long long
+#define ll long long
+#define forl(i, a, b, k) for (ll i = a; i < b; i += k)
+#define all(a) a.begin(), a.end()
+#define allr(a) a.rbegin(), a.rend()
+#define pb push_back
+                                    
+                                    
+#define F first
+#define S second
 
-string smallestWithSum(int k, int len) {
-    string res(len, '0');
-    for (int i = 0; i < len; i++) {
-        for (int d = (i == 0); d <= 9; d++) {
-            int rem = k - d;
-            int maxRem = 9 * (len - i - 1);
-            if (rem >= 0 && rem <= maxRem) {
-                res[i] = '0' + d;
-                k -= d;
-                break;
-            }
+
+int power(int x, int n) {
+    int res = 1;
+    while (n > 0) {
+        if (n & 1) {
+            res *= x;
+            n--;
+        } else {
+            x = x * x;
+            n /= 2;
         }
     }
-    return (k == 0 ? res : "-1");
+    return res;
 }
 
-string largestWithSum(int k, int len) {
-    string res(len, '0');
-    for (int i = 0; i < len; i++) {
-        for (int d = 9; d >= (i == 0); d--) {
-            int rem = k - d;
-            int maxRem = 9 * (len - i - 1);
-            if (rem >= 0 && rem <= maxRem) {
-                res[i] = '0' + d;
-                k -= d;
-                break;
-            }
+int fast_pow(int x, int n, int mod) {
+    int res = 1;
+    while(n > 0) {
+        if(n & 1) {
+            res *= x;
+            res %= mod;
+            n--;
+        }
+        else{
+            x *= x;
+            x %= mod;
+            n /= 2;
         }
     }
-    return (k == 0 ? res : "-1");
+    return res % mod;
 }
 
+inline void solve() {
+    
+}
+                        
 signed main() {
-    int l, r, k;
-    cin >> l >> r >> k;
-
-    int lenL = to_string(l).size();
-    int lenR = to_string(r).size();
-
-    string smallest = "-1", largest = "-1";
-    for (int len = lenL; len <= lenR; len++) {
-        string s = smallestWithSum(k, len);
-        if (s != "-1") {
-            int val = stoll(s);
-            if (val >= l && val <= r) {
-                smallest = s;
-                break;
-            }
-        }
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+             
+    int t = 1;
+    // cin >> t;
+    for(int _ = 1; _ <= t; _++) {
+        // cout << "Caso #" << _ << endl;
+        solve();
     }
-
-    for (int len = lenR; len >= lenL; len--) {
-        string s = largestWithSum(k, len);
-        if (s != "-1") {
-            int val = stoll(s);
-            if (val >= l && val <= r) {
-                largest = s;
-                break;
-            }
-        }
-    }
-
-    cout << smallest << " " << largest << "\n";
+                
     return 0;
 }
+// JAI SHREE RAM

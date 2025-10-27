@@ -13,7 +13,7 @@ using namespace __gnu_pbds;
 typedef tree<ll, null_type, less<ll>, rb_tree_tag, tree_order_statistics_node_update> ordered_set;
 typedef tree<pair<ll, ll>, null_type, less<pair<ll, ll>>, rb_tree_tag, tree_order_statistics_node_update> ordered_multiset;
 // a.order_of_key(x)-----gives no of elements less than that number
-// a.find_by_order(k)---kth element starting from 0
+// *a.find_by_order(k)---kth element starting from 0
 // ordered_multiset lower bound -> -1, upper bound -> INT_MAX
 // multiset key should be pair
 #define F first

@@ -34,11 +34,11 @@ signed main() {
 
 // bridges and Articulation Point
 // for loop dfs for forest
-// adjust the size of container so that tle dont occur
+// adjust the size of container so that TLE dont occur
 
 // Formal Defination    
 /*Let's say we are in the DFS, looking through the edges starting from vertex v . 
-The current edge (v, to) is a bridge if and only if none of the vertices to and its descendants 
+The current edge (v, to) is a bridge if and only if none of the vertices "to" and its descendants 
 in the DFS traversal tree has a back-edge to vertex v or any of its ancestors.
 Indeed, this condition means that there is no other way from  "v" to "to" except for edge (v, to) .*/
 
