@@ -242,7 +242,7 @@ function<vector<char>(int, int)> SegSieve = [&](int L, int R) -> vector<char>{
     int lim = sqrt(R);
     vector<char> mark(lim + 1, false);
     vector<int> primes;
-    for (int i = 2; i <= lim; ++i) {
+    for (int i = 2; i <= lim * lim; ++i) {
         if (!mark[i]) {
             primes.emplace_back(i);
             for (int j = i * i; j <= lim; j += i) {
@@ -355,9 +355,9 @@ function<int(int, int)> gcd = [&](int a, int b) -> int {
 // Extended Euclidean Algorithm O(log(min(a, b)))
 function<int(int, int, int&, int&)> EE_gcd = [&](int a, int b, int &x, int &y) -> int {
     if (b == 0) {
-        x = (a >= 0 ? 1 : -1); // Handle sign
+        x = 1;
         y = 0;
-        return llabs(a);
+        return a;
     }
     int x1, y1;
     int d = EE_gcd(b, a % b, x1, y1);
@@ -365,6 +365,18 @@ function<int(int, int, int&, int&)> EE_gcd = [&](int a, int b, int &x, int &y) -
     y = x1 - (a / b) * y1;
     return d;
 };
+
+bool find_any_solution(int a, int b, int c, int &x0, int &y0, int &g) {
+    g = EE_gcd(abs(a), abs(b), x0, y0);
+    if (c % g) {
+        return false;
+    }
+    x0 *= c / g;
+    y0 *= c / g;
+    if (a < 0) x0 = -x0;
+    if (b < 0) y0 = -y0;
+    return true;
+}
 
 
 // No of Coprime Pairs in array O(n + mlogm) m->max elem in array, n = size of array
