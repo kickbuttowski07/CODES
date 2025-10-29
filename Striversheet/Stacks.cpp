@@ -62,7 +62,7 @@ public:
     }
 
     int get(int key) {
-        if(mp.find(key) ==mp.end()) {
+        if(mp.find(key) == mp.end()) {
             return -1;
         }
         Mynode *curr = mp[key];
@@ -123,7 +123,7 @@ class Mystack{
             cout << "Stack Over flow" << endl;
         }
         else{
-            this->stk[++top] = val;
+            this->stk[top++] = val;
         }
     }
 
@@ -312,16 +312,16 @@ string infixToPrefix(string &s) {
     }
     stack<char>stk;
     for(int i=0;i<n;i++) {
-        char c=s[i];
+        char c = s[i];
         if(isalnum(c)) {
-            ans+=c;
+            ans += c;
         }
         else if(c == '(') {
             stk.push(c);
         }
         else if(c == ')') {
             while(!stk.empty() && stk.top() != '(') {
-                ans+=stk.top();
+                ans += stk.top();
                 stk.pop();
             }
             if(!stk.empty()) {

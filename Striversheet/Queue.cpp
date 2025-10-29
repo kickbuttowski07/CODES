@@ -7,81 +7,67 @@ const int N = 2e5 + 1;
 #define forl(i, a, b, k) for (ll i = a; i < b; i += k)
 #define Sort(a) sort(a.begin(), a.end());
 #define MOD 1000000007
-class Queue
-{
+class Queue {
     int *queue;
     int start, end, currSize, maxSize;
 
 public:
-    Queue()
-    {
+    Queue() {
         // Creation a array of queue
         queue = new int[16];
         start = -1;
         end = -1;
         currSize = 0;
     }
-    Queue(int maxSize)
-    {
+    Queue(int maxSize) {
         (*this).maxSize = maxSize;
         queue = new int[maxSize];
         start = -1;
         end = -1;
         currSize = 0;
     }
-    void push(int val)
-    {
+    void push(int val) {
         // value to be queued or pushed
-        if (currSize == maxSize)
-        {
+        if (currSize == maxSize) {
             cout << "Queue is full" << endl;
             exit(1);
         }
-        if (end == -1)
-        {
+        if (end == -1) {
             start = 0;
             end = 0;
         }
-        else
-        {
+        else {
             end = (end + 1) % maxSize;
         }
         queue[end] = val;
         cout << "The element pushed is = " << val << endl;
         currSize++;
     }
-    void pop()
-    {
-        if (start == -1)
-        {
+    void pop() {
+        if (start == -1) {
             cout << "Queue is Empty" << endl;
             exit(1);
         }
         int popped = queue[start]; // storing the element which is popping
-        if (currSize == 1)
-        {
+        if (currSize == 1) {
             start = -1;
             end = -1;
         }
-        else
-        {
+        else {
             start = (start + 1) % maxSize;
         }
         currSize--;
         cout << "poped element = " << popped << endl;
         exit(1);
     }
-    int top()
-    {
-        if (start == -1)
-        {
+    int top() {
+        if (start == -1) {
             cout << "Queue is Empty" << endl;
             exit(1);
         }
         return queue[start];
     }
-    int size()
-    {
+    int size() {
         return currSize;
     }
 };

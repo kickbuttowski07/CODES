@@ -461,3 +461,35 @@ vector<int> manacher_odd(string s) {
     return vector<int>(begin(p) + 1, end(p) - 1);
 }
 
+
+vector<int>suffix_array(const string &s) {
+    // Using Radix Sort
+    int n = s.size();
+    vector<int> sa(n), tmp(n), rnk(n);
+    for (int i = 0; i < n;i++) {
+        sa[i] = i;
+        rnk[i] = (unsigned char)(s[i]);
+    }
+
+    for (int k = 1; k < n; k <<= 1) {
+        auto cmp = [&](int i, int j) {
+            if(rnk[i] != rnk[j]) {
+                return rnk[i] < rnk[j];
+            }
+            int x = (i + k) < n ? rnk[i + k] : -1;
+            int y = (j + k) ? rnk[j + k] : -1;
+            return x < y;
+        };
+        sort(all(sa), cmp);
+        tmp[sa[0]] = 0;
+        for (int i = 1; i < n;i++) {
+            tmp[sa[i]] = tmp[sa[i - 1]] + (cmp(sa[i - 1], sa[i]) ? 1 : 0);
+        }
+        rnk = tmp;
+        if(rnk[sa[n - 1]] == n - 1) {
+            break;
+        }
+    }
+    return sa;
+}
+

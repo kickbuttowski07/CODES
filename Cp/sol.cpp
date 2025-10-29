@@ -10,82 +10,26 @@ const int N = 2e5 + 1, MOD = (int)(1e9 + 7);
 
 #define F first
 #define S second
-
-class PalinHash{
-    static const int p = 131;
-    static const int MOD = 1595061967;
-    vector<int> hsh, rhsh;
-    vector<int> pw;
-    int n;
-
-public:
-    PalinHash(const string &s) {
-        this->n = s.size();
-        this->hsh = vector<int>(n + 1, 0);
-        this->rhsh = vector<int>(n + 1, 0);
-        this->pw = vector<int>(n + 1, 1);
-        for (int i = 1; i <= n;i++) {
-            hsh[i] = (1LL * hsh[i - 1] * p + s[i - 1]) % MOD;
-            pw[i] = (1LL * pw[i - 1] * p) % MOD;
-        }
-
-        for (int i = n - 1; i >= 0;i--) {
-            rhsh[i] = (1LL * rhsh[i + 1] * p + s[i]) % MOD;
-        }
-    }
-
-    int hash_value(int l, int r) {
-        return (hsh[r + 1] - 1LL * hsh[l] * pw[r - l + 1] % MOD + MOD) % MOD;
-    }
-
-    int reverse_hash_value(int l, int r) {
-        return (rhsh[l] - 1LL * rhsh[r + 1] * pw[r - l + 1] % MOD + MOD) % MOD;
-    }
-
-    bool is_palindrome(int l, int r) {
-        return hash_value(l, r) == reverse_hash_value(l, r);
-    }
-};
-
-vector<int>pref(const string s) {
-    int n = s.size();
-    vector<int> pi(n);
-    for (int i = 1; i < n;i++) {
-        int j = pi[i - 1];
-        while(j > 0 && s[i] != s[j]) {
-            j = pi[j - 1];
-        }
-        if(s[i] == s[j]) {
-            j++;
-        }
-        pi[i] = j;
-    }
-    return pi;
-}
-
-vector<int>zfunc(const string s) {
-    int n = s.size();
-    vector<int> z(n);
-    z[0] = n;
-    int l = 0, r = 0;
-    for (int i = 1; i < n;i++) {
-        z[i] = max(0LL, min(z[i - l], r - i + 1));
-        while(i + z[i] < n && s[i + z[i]] == s[z[i]]) {
-            l = i, r = i + z[i];
-            z[i]++;
-        }
-    }
-    return z;
-}
-
 inline void solve() {
-    string s;
-    cin >> s;
-    int n = s.size();
-    vector<int> dp(n + 1, 0);
-    PalinHash ph(s);
-    int a, b;
-    cin >> a >> b;
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+
+    sort(a.begin(), a.end());
+
+    vector<int> dp(n, 1e18);
+    dp[0] = 0;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < i && j + 1 < n; j++) {
+            dp[i] = min(dp[i], dp[j] + (a[i] - a[j + 1]));
+        }
+    }
+
+    cout << dp[n - 1] << "\n";
 }
                         
 signed main() {
