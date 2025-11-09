@@ -7,6 +7,63 @@ const int N = 2e5 + 1;
 #define forl(i, a, b, k) for (ll i = a; i < b; i += k)
 #define Sort(a) sort(a.begin(), a.end());
 #define MOD 1000000007
+
+class myQueue {
+private:
+     // fixed-size array
+    int* arr;  
+     // index of front element
+    int front; 
+     // current number of elements
+    int size;   
+      // maximum capacity
+    int capacity;
+
+public:
+    myQueue(int cap) {
+        capacity = cap;
+        arr = new int[capacity];
+        front = 0;
+        size = 0;
+    }
+
+    // Insert an element at the rear
+    void enqueue(int x) {
+        if (size == capacity) {
+            cout << "Queue is full!" << endl;
+            return;
+        }
+        int rear = (front + size) % capacity;
+        arr[rear] = x;
+        size++;
+    }
+
+    // Remove an element from the front
+    int dequeue() {
+        if (size == 0) {
+            cout << "Queue is empty!" << endl;
+            return -1;
+        }
+        int res = arr[front];
+        front = (front + 1) % capacity;
+        size--;
+        return res;
+    }
+
+    // Get the front element
+    int getFront() {
+        if (size == 0) return -1;
+        return arr[front];
+    }
+
+    // Get the rear element
+    int getRear() {
+        if (size == 0) return -1;
+        int rear = (front + size - 1) % capacity;
+        return arr[rear];
+    }
+};
+
 class Queue {
     int *queue;
     int start, end, currSize, maxSize;
@@ -103,7 +160,6 @@ int main()
     }
     return 0;
 }
-
 
 
 

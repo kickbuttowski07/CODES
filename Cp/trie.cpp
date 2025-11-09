@@ -329,20 +329,24 @@ public:
             bool x = (num >> i) & 1;
             bool y = (lim >> i) & 1;
 
-            if (y) {
+            if (y) { // bit is set
                 if (curr->ch[x]) {
                     sum += curr->ch[x]->cnt;
+                    // we can take both same
                 }
                 curr = curr->ch[1 - x];
+                // explore if there are any other
             } else {
+                // bit is not set
                 curr = curr->ch[x];
+                // must take the same 
             }
         }
-
+        // count of = lim
         if (curr) {
             sum += curr->cnt;
         }
-
+        
         return sum;
     }
 };

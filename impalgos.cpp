@@ -189,7 +189,7 @@ signed main() {
 }
 // JAI SHREE RAM
 
-// Binary search square roor
+// Binary search square root
 // int n, k;
 // cin >> n >> k;
 // float ans = 0.0;
