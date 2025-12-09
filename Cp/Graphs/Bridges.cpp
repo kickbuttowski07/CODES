@@ -63,6 +63,7 @@ function<void(int, int)> dfs = [&](int src, int par) -> void {
     int child = 0;
     for(auto ch : g[src]) {
         if(par == ch && !parent_skip) {
+            // avoids treating the parent as a back edge
             parent_skip = true;
             continue;
         }
@@ -71,7 +72,7 @@ function<void(int, int)> dfs = [&](int src, int par) -> void {
             low[src] = min(low[src], tin[ch]);
         }
         else{
-            // direct edge
+            // direct edge or Tree edge
             dfs(ch, src);
             low[src] = min(low[src], low[ch]);
             if(tin[src] < low[ch]) {

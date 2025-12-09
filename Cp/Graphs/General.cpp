@@ -100,8 +100,7 @@ function<bool(int, int)> dfs_bipartite = [&](int par, int col) -> bool {
     return true;
 };
 
-function<bool(int)> bfs_bipartite = [&](int src) -> bool
-{
+function<bool(int)> bfs_bipartite = [&](int src) -> bool {
     // O(V + E)
     bool bi = 1;
     vector<int> side(N + 1, -1);
@@ -109,19 +108,15 @@ function<bool(int)> bfs_bipartite = [&](int src) -> bool
     queue<int> q;
     q.push(src);
     side[src] = 0;
-    while (!q.empty())
-    {
+    while (!q.empty()) {
         int src = q.front();
         q.pop();
-        for (auto ch : g[src])
-        {
-            if (side[ch] == -1)
-            {
+        for (auto ch : g[src]) {
+            if (side[ch] == -1) {
                 side[ch] = side[src] ^ 1;
                 q.push(ch);
             }
-            else
-            {
+            else {
                 bi &= (side[ch] != side[src]);
             }
         }
@@ -269,8 +264,7 @@ function<void(int, int)> dfs_subtree = [&](int src, int par) -> void {
 // dfs_leaves count
 vector<vector<int>> g;
 vector<int> cn_leaf;
-function<void(int, int)> dfs_leaves = [&](int src, int par) -> void
-{
+function<void(int, int)> dfs_leaves = [&](int src, int par) -> void {
     bool chk = 1;
     for (auto child : g[src]) {
         if (par != child) {
@@ -309,8 +303,7 @@ function<void(int)> bfs_level = [&](int src) -> void {
 };
 
 // diameter of the tree
-function<pair<int, int>(int)> diameter_nodes = [&](int src) -> pair<int, int>
-{
+function<pair<int, int>(int)> diameter_nodes = [&](int src) -> pair<int, int> {
     queue<int> q;
     q.push(src);
     int dis[N + 1];

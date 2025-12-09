@@ -51,14 +51,13 @@ public:
     void Insertion() {
         // O(N), O(N^2), O(N^2) -> B,A,W
         // number of inversions is directly proportional to number of swaps. 
-        for (int i = 1; i < n;i++){
-            int key = InsSort[i];
-            int j = i - 1;
-            while (j >= 0 && InsSort[j] > key) {
-                InsSort[j + 1] = InsSort[j];
-                j = j - 1;
-            }
-            InsSort[j + 1] = key;
+        for (int i = 0; i < n;i++){
+            int j = i;
+            while (j > 0 && InsSort[j - 1] > InsSort[j]) {
+                int temp = InsSort[j - 1];
+                InsSort[j - 1] = InsSort[j];
+                InsSort[j] = temp;
+            }   
         }
     }
 

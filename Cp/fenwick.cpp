@@ -67,7 +67,7 @@ private:
     vector<T> bit;
     // 0-based
 public:
-    BIT(int size) : size(size), bit(size + 1) {}
+    BIT(int size) : size(size), bit(size + 2) {}
 
     void add(int idx, T val) {
         ++idx;  // shift to 1-based internally

@@ -37,16 +37,15 @@ class MinHeap {
         return (2 * i + 2);
     }
 
-    int extractMin();
+    int extractMin(); // remove the minimum
 
-    void decreaseKey(int i, int new_val);
+    void decreaseKey(int i, int new_val); // change a value to new value at index = i
 
     int getMin() {
         return harr[0];
     }
 
-    
-    void deleteKey(int i);
+    void deleteKey(int i); 
 
     void insertKey(int k);
 };
@@ -64,9 +63,9 @@ void MinHeap::insertKey(int k) {
     }
 
     // First insert the new key at the end
-    heap_size++;
-    int i = heap_size - 1;
+    int i = heap_size;
     harr[i] = k;
+    heap_size++;
 
     // Fix the min heap property if it is violated
     while (i != 0 && harr[parent(i)] > harr[i]) {
@@ -101,7 +100,6 @@ int MinHeap::extractMin() {
     harr[0] = harr[heap_size - 1];
     heap_size--;
     MinHeapify(0);
-
     return root;
 }
 
@@ -162,11 +160,16 @@ public:
             swap(&arr[smallest], &arr[i]);
             heapify(arr, n, smallest);
         }
-    }
+    } // For one call it is O(log n)    
 
     void BuildMaxHeap(void) {
         for (int i = n / 2 - 1; i >= 0; i--) {
             heapify(arr, n, i);
+        } // O(n)
+        for (int i = n - 1; i >= 0; i--) {
+            swap(&arr[0], &arr[i]);
+            heapify(arr, n, i);
+            // here itself we can sort the array inplace, by swaping the top with (size - 1) and heapify upt size - 1
         }
     }
 };

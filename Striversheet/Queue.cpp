@@ -1,13 +1,83 @@
-// IMPLEMNTATION OF QUEUE USING ARRAY
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 2e5 + 1;
+const int N = 2e5 + 1, MOD = (int)(1e9 + 7);
+#define int long long
 #define ll long long
-#define vll vector<ll>
 #define forl(i, a, b, k) for (ll i = a; i < b; i += k)
-#define Sort(a) sort(a.begin(), a.end());
-#define MOD 1000000007
+#define all(a) a.begin(), a.end()
+#define allr(a) a.rbegin(), a.rend()
+#define pb push_back
+                                    
+                                    
+#define F first
+#define S second
+                    
+// Implementation of Queue using Array
+class myQueue {
+    // Array to store queue elements.
+    int *arr;
 
+    // Maximum number of elements the queue can hold.
+    int capacity;
+
+    // Current number of elements in the queue.
+    int size;
+
+  public:
+    myQueue(int c) {
+        this->capacity = c;
+        this->arr = new int[capacity];
+        this->size = 0;
+    }
+
+    bool isEmpty() {
+        return size == 0;
+    }
+    bool isFull() {
+        return size == capacity;
+    }
+
+    // Adds an element x at the rear of the queue.
+    void enqueue(int x) {
+        if (isFull()) {
+            cout << "Queue is full!\n";
+            return;
+        }
+        arr[size] = x;
+        size++;
+    }
+
+    // Removes the front element of the queue.
+    void dequeue() {
+        if (isEmpty()) {
+            cout << "Queue is empty!\n";
+            return;
+        }
+        for (int i = 1; i < size; i++) {
+            arr[i - 1] = arr[i];
+        }
+        size--;
+    }
+
+    // Returns the front element of the queue.
+    int getFront() {
+        if (isEmpty()) {
+            cout << "Queue is empty!\n";
+            return -1;
+        }
+        return arr[0];
+    }
+    // Return the last element of queue
+    int getRear() {
+        if (isEmpty()) {
+            cout << "Queue is empty!" << endl;
+            return -1;
+        }
+        return arr[size - 1];
+    }
+};
+
+// Implementation of Circular Queue using array
 class myQueue {
 private:
      // fixed-size array
@@ -63,104 +133,23 @@ public:
         return arr[rear];
     }
 };
-
-class Queue {
-    int *queue;
-    int start, end, currSize, maxSize;
-
-public:
-    Queue() {
-        // Creation a array of queue
-        queue = new int[16];
-        start = -1;
-        end = -1;
-        currSize = 0;
-    }
-    Queue(int maxSize) {
-        (*this).maxSize = maxSize;
-        queue = new int[maxSize];
-        start = -1;
-        end = -1;
-        currSize = 0;
-    }
-    void push(int val) {
-        // value to be queued or pushed
-        if (currSize == maxSize) {
-            cout << "Queue is full" << endl;
-            exit(1);
-        }
-        if (end == -1) {
-            start = 0;
-            end = 0;
-        }
-        else {
-            end = (end + 1) % maxSize;
-        }
-        queue[end] = val;
-        cout << "The element pushed is = " << val << endl;
-        currSize++;
-    }
-    void pop() {
-        if (start == -1) {
-            cout << "Queue is Empty" << endl;
-            exit(1);
-        }
-        int popped = queue[start]; // storing the element which is popping
-        if (currSize == 1) {
-            start = -1;
-            end = -1;
-        }
-        else {
-            start = (start + 1) % maxSize;
-        }
-        currSize--;
-        cout << "poped element = " << popped << endl;
-        exit(1);
-    }
-    int top() {
-        if (start == -1) {
-            cout << "Queue is Empty" << endl;
-            exit(1);
-        }
-        return queue[start];
-    }
-    int size() {
-        return currSize;
-    }
-};
-inline void solve()
-{
-    Queue q(6);
-    q.push(4);
-    q.push(6);
-    q.push(1);
-    cout << "top = " << q.top() << endl;
-    q.push(3);
-    q.push(5);
-    q.push(2);
-    q.push(7);
-    q.pop();
-    q.pop();
-    q.push(10);
-    cout << "size = " << q.size() << endl;
+                                    
+inline void solve() {
+    
 }
-int main()
-{
-#ifdef _DEBUG
-    freopen("input.txt", "r", stdin);
-    //  freopen("output.txt", "w", stdout);
-#endif
+                        
+signed main() {
     ios_base::sync_with_stdio(false);
-    cin.tie(0), cout.tie(0);
-    int _ = 1;
-    // cin >> _;
-    while (_--)
-    {
+    cin.tie(0);
+    cout.tie(0);
+             
+    int t = 1;
+    cin >> t;
+    for(int _ = 1; _ <= t; _++) {
+        // cout << "Caso #" << _ << endl;
         solve();
     }
+                
     return 0;
 }
-
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+// JAI SHREE RAM

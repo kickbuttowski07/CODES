@@ -50,8 +50,7 @@ function<vector<int>(int)> Bellman = [&](int src) -> vector<int> {
         for (auto tp : g) {
             tie(u, v, w) = tp;
             if (dis[u] != 1e8 && dis[v] > dis[u] + w) {
-                if (i == n - 1)
-                {
+                if (i == n - 1) {
                     return {-1}; // Negative Cycle if relaxation is happening in nth iteration then it has -ve cycle, since have atmost n-1 edges of shortest path 
                 }
                 dis[v] = dis[u] + w; // Relaxation or Updating
@@ -119,8 +118,7 @@ auto dijkstra_alg = [&](int src) -> vector<int>
 // for detection of neg cycles,and shortest path in case of neg weights, directed and undirected
 // Not for neg cycles
 // used adj matrix
-auto floyd_warshal = [&](void) -> void
-{
+auto floyd_warshal = [&](void) -> void {
     vector<vector<int>> g(n, vector<int>(n, -1));
     for (int i = 0; i < m;i++){
         int u, v, w;
@@ -172,7 +170,7 @@ auto floyd_warshal = [&](void) -> void
 
 // https://codeforces.com/contest/1063/problem/B
 // 0-1 BFS
-// Imp notes is that here the edge waits are (0, 1) according to that we push front or back
+// Imp notes is that here the edge weights are (0, 1) according to that we push front or back
 // Do 0-1 BFS similar to dijkstra, also do relaxation with similar conditions
 // In general do in 2d matrix movements shortest distance to reach with constraints
 // vector<int> dis(n, LLONG_MAX);
