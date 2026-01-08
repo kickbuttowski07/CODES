@@ -12,19 +12,10 @@ const int N = 2e5 + 1, MOD = (int)(1e9 + 7);
 #define F first
 #define S second
 
-class B{
-public:
-    int var_b;
-    void display() {
-        cout << "varb =" << var_b << endl;
-    }
-};
-
-class D{
-};
 
 inline void solve() {
-    
+
+
 }
                         
 signed main() {
@@ -33,7 +24,7 @@ signed main() {
     cout.tie(0);
              
     int t = 1;
-    cin >> t;
+    cin >> t;       
     for(int _ = 1; _ <= t; _++) {
         // cout << "Caso #" << _ << endl;
         solve();
